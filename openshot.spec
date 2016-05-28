@@ -1,6 +1,6 @@
 Name:           openshot
 Version:        2.0.7
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
@@ -19,10 +19,32 @@ BuildRequires:  desktop-file-utils
 # To fix icon
 BuildRequires:  ImageMagick
 
-Requires:       python3-qt5
+Requires:       mlt
+Requires:       mlt-python
+Requires:       ladspa
+Requires:       notify-python
+Requires:       pygoocanvas
+Requires:       pygtk2-libglade
+Requires:       python3-pillow
 Requires:       python3-httplib2
-Requires:       python3-libopenshot
-Requires:       ffmpeg-libs
+Requires:       pyxdg
+Requires:       SDL
+Requires:       sox
+Requires:       librsvg2
+Requires:       frei0r-plugins
+Requires:       fontconfig
+Requires:       python3-libopenshot >= 0.1.0
+Requires:       libopenshot-audio >= 0.1.0
+Requires:       qt5-qtsvg
+Requires:       qt5-qtwebkit
+Requires:       python3-qt5
+Requires:       python3-zmq
+# Needed because it owns icon directories
+Requires:       hicolor-icon-theme
+# Optional
+Recommends:     ffmpeg
+Recommends:     blender
+Recommends:     vid.stab
 
 
 %description
@@ -107,6 +129,11 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+
+* Fri May 27 2016 David Vásquez <davidjeremias82 AT gmail DOT com> 2.0.7-3
+- Added missing dependencies
+- Sanitize tabs.
+
 * Mon Apr 18 2016 Richard Shaw <hobbes1069@gmail.com> - 2.0.7-2
 - Update to require python3-libopenshot.
 

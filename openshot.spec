@@ -41,7 +41,7 @@ Requires:       python3-qt5
 Requires:       python3-zmq
 # Needed because it owns icon directories
 Requires:       hicolor-icon-theme
-# Optional
+Requires:       python3-qt5-webkit
 Recommends:     ffmpeg
 Recommends:     blender
 Recommends:     vid.stab

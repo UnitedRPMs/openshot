@@ -1,6 +1,6 @@
 Name:           openshot
 Version:        2.0.7
-Release:        3%{?dist}
+Release:        5%{?dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
@@ -129,8 +129,13 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Sun Jun 26 2016 The UnitedRPMs Project (Key for UnitedRPMs infrastructure) <unitedrpms@protonmail.com> - 2.0.7-5
+- Rebuild with new ffmpeg
 
-* Fri May 27 2016 David Vásquez <davidjeremias82 AT gmail DOT com> 2.0.7-3
+* Thu Jun  9 2016 Pavlo Rudyi <paulcarroty at riseup.net> - 2.0.7-4
+- Added the depends python3-qt5-webkit.
+
+* Fri May 27 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 2.0.7-3
 - Added missing dependencies
 - Sanitize tabs.
 

@@ -1,6 +1,6 @@
 Name:           openshot
 Version:        2.0.7
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
@@ -129,6 +129,10 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+
+* Tue Jul 12 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 2.0.7-6
+- Massive rebuild 
+
 * Sun Jun 26 2016 The UnitedRPMs Project (Key for UnitedRPMs infrastructure) <unitedrpms@protonmail.com> - 2.0.7-5
 - Rebuild with new ffmpeg
 

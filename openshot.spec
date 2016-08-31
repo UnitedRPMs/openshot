@@ -1,13 +1,14 @@
 Name:           openshot
-Version:        2.0.7
-Release:        6%{?dist}
+Version:        2.1.0
+Release:        1%{?dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
 License:        GPLv3+
 URL:            http://www.openshotvideo.com/
 
-Source0:        http://launchpad.net/openshot/2.0/%{version}/+download/openshot-qt-%{version}.tar.gz
+#Source0:        http://launchpad.net/openshot/2.0/%{version}/+download/openshot-qt-%{version}.tar.gz
+Source0:        https://github.com/OpenShot/openshot-qt/archive/v%{version}.tar.gz
 
 BuildArch: noarch
 
@@ -65,7 +66,7 @@ Features include:
 
 
 %prep
-%setup -qc
+%setup -n %{name}-qt-%{version}
 
 
 %build
@@ -129,6 +130,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Wed Aug 31 2016 Pavlo Rudyi <paulcarroty at riseup.net> - 2.1.0-1
+- Updated to 2.1
+- New source URL
 
 * Tue Jul 12 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 2.0.7-6
 - Massive rebuild 

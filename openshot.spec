@@ -154,7 +154,7 @@ update-desktop-database &> /dev/null || :
 
 * Sat Sep 03 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 2.1.0-2
 - Disabled "tutorial first"
-- Fixed broken package with new structure
+- Solved local issues
 
 * Wed Aug 31 2016 Pavlo Rudyi <paulcarroty at riseup.net> - 2.1.0-1
 - Updated to 2.1

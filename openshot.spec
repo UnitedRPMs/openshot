@@ -1,6 +1,6 @@
 Name:           openshot
 Version:        2.1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
@@ -9,6 +9,8 @@ URL:            http://www.openshotvideo.com/
 
 #Source0:        http://launchpad.net/openshot/2.0/%{version}/+download/openshot-qt-%{version}.tar.gz
 Source0:        https://github.com/OpenShot/openshot-qt/archive/v%{version}.tar.gz
+Source1:	gpl-2.0.txt
+Patch:		disabled_first_tutorial.patch
 
 BuildArch: noarch
 
@@ -17,6 +19,7 @@ BuildRequires:  python3-qt5-devel
 BuildRequires:  libopenshot
 BuildRequires:  libopenshot-audio
 BuildRequires:  desktop-file-utils
+BuildRequires:	python3-setuptools
 # To fix icon
 BuildRequires:  ImageMagick
 
@@ -31,7 +34,7 @@ Requires:       python3-httplib2
 Requires:       pyxdg
 Requires:       SDL
 Requires:       sox
-Requires:       librsvg2
+# Requires:       librsvg2
 Requires:       frei0r-plugins
 Requires:       fontconfig
 Requires:       python3-libopenshot >= 0.1.0
@@ -67,39 +70,41 @@ Features include:
 
 %prep
 %setup -n %{name}-qt-%{version}
-
+sed -i 's/^ROOT =.*/ROOT = False/' setup.py
+%patch -p0 
 
 %build
+
 %{__python3} setup.py build
 
+# FIX lang
+cd src/locale/
+for dir in *;do echo "%lang($dir) %{python3_sitelib}/openshot_qt/locale/$dir" >> %{_builddir}/%name-qt-%version/OpenShot.lang
+done
 
 %install
-%{__python3} setup.py install -O1 --skip-build --root=%{buildroot}
+%{__python3} setup.py install --root=%{buildroot} --optimize=1
 
-# We strip bad shebangs (/usr/bin/env) instead of fixing them
-# since these files are not executable anyways
-find %{buildroot}/%{python3_sitelib} -name '*.py' \
-  -exec grep -q '^#!' '{}' \; -print | while read F
-do
-  awk '/^#!/ {if (FNR == 1) next;} {print}' $F >chopped
-  touch -r $F chopped
-  mv chopped $F
-done
 
 # Validate desktop file
 desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}-qt.desktop
 
-# Move icon files to the preferred location
-mkdir -p %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/ \
-         %{buildroot}%{_datadir}/icons/hicolor/64x64/apps/
-mv %{buildroot}%{_datadir}/pixmaps/%{name}-qt.svg \
-   %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/
+# FIX incorrect-fsf-address
+cp -f %{S:1} %{buildroot}/%{python3_sitelib}/openshot_qt/images/Humanity/COPYING
 
-# Provided icon is not square
-convert xdg/openshot-qt.png -virtual-pixel Transparent -set option:distort:viewport "%[fx:max(w,h)]x%[fx:max(w,h)]-%[fx:max((h-w)/2,0)]-%[fx:max((w-h)/2,0)]" -filter point -distort SRT 0 +repage %{buildroot}%{_datadir}/icons/hicolor/64x64/apps/openshot-qt.png
+# FIX wrong-script-interpreter/shebang line
+sed -i 's|/usr/bin/env python3|/usr/bin/python3|g' %{buildroot}/%{python3_sitelib}/openshot_qt/windows/export_test.py
+sed -i 's|/usr/bin/env python3|/usr/bin/python3|g' %{buildroot}/%{python3_sitelib}/openshot_qt/launch.py
 
-%find_lang OpenShot
+# FIX non-executable-script
+chmod 0755 %{buildroot}/%{python3_sitelib}/openshot_qt/launch.py
+chmod 0755 %{buildroot}/%{python3_sitelib}/openshot_qt/windows/export_test.py
 
+# FIX python-bytecode-inconsistent-mtime
+rm -f %{buildroot}/%{python3_sitelib}/openshot_qt/windows/__pycache__/export_test.cpython-35.pyc
+rm -f %{buildroot}/%{python3_sitelib}/openshot_qt/__pycache__/launch.cpython-35.opt-1.pyc
+rm -f %{buildroot}/%{python3_sitelib}/openshot_qt/windows/__pycache__/export_test.cpython-35.opt-1.pyc
+rm -f %{buildroot}/%{python3_sitelib}/openshot_qt/__pycache__/launch.cpython-35.pyc
 
 %post
 /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
@@ -117,19 +122,40 @@ update-desktop-database &> /dev/null || :
 
 
 %files -f OpenShot.lang
-%license COPYING
-%doc AUTHORS README
-%{_bindir}/*
-%{_datadir}/applications/%{name}-qt.desktop
-%{_datadir}/icons/hicolor/*/apps/*
-%{_datadir}/mime/packages/*
-%{python3_sitelib}/%{name}_qt/
-%exclude %{python3_sitelib}/%{name}_qt/locale/
-%{python3_sitelib}/*egg-info
+%{_bindir}/openshot-qt
 %{_prefix}/lib/mime/packages/openshot-qt
+%{python3_sitelib}/%{name}_qt*-py*.egg-info/
+%{_datadir}/applications/openshot-qt.desktop
+%{_datadir}/mime/packages/openshot-qt.xml
+%{_datadir}/pixmaps/openshot-qt.svg
+%{python3_sitelib}/%{name}_qt/blender/  
+%{python3_sitelib}/%{name}_qt/images/     
+%{python3_sitelib}/%{name}_qt/presets/      
+%{python3_sitelib}/%{name}_qt/settings/  
+%{python3_sitelib}/%{name}_qt/titles/       
+%{python3_sitelib}/%{name}_qt/windows/
+%{python3_sitelib}/%{name}_qt/classes/  
+%{python3_sitelib}/%{name}_qt/launch.py  
+%{python3_sitelib}/%{name}_qt/profiles/     
+%{python3_sitelib}/%{name}_qt/tests/     
+%{python3_sitelib}/%{name}_qt/transitions/
+%{python3_sitelib}/%{name}_qt/effects/       
+%{python3_sitelib}/%{name}_qt/__pycache__/  
+%{python3_sitelib}/%{name}_qt/timeline/  
+%{python3_sitelib}/%{name}_qt/uploads/
+%{python3_sitelib}/%{name}_qt/locale/__pycache__/generate_translations.cpython-35.opt-1.pyc
+%{python3_sitelib}/%{name}_qt/locale/__pycache__/generate_translations.cpython-35.pyc
+%{python3_sitelib}/%{name}_qt/locale/__pycache__/test_translations.cpython-35.opt-1.pyc
+%{python3_sitelib}/%{name}_qt/locale/__pycache__/test_translations.cpython-35.pyc
+
 
 
 %changelog
+
+* Sat Sep 03 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 2.1.0-2
+- Disabled "tutorial first"
+- Fixed broken package with new structure
+
 * Wed Aug 31 2016 Pavlo Rudyi <paulcarroty at riseup.net> - 2.1.0-1
 - Updated to 2.1
 - New source URL

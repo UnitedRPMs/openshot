@@ -1,16 +1,16 @@
 Name:           openshot
-Version:        2.1.0
-Release:        2%{?dist}
+Version:        2.2.0
+Release:        1%{?dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
 License:        GPLv3+
 URL:            http://www.openshotvideo.com/
 
-#Source0:        http://launchpad.net/openshot/2.0/%{version}/+download/openshot-qt-%{version}.tar.gz
+#Source0:       http://launchpad.net/openshot/2.0/%{version}/+download/openshot-qt-%{version}.tar.gz
 Source0:        https://github.com/OpenShot/openshot-qt/archive/v%{version}.tar.gz
-Source1:	gpl-2.0.txt
-Patch:		disabled_first_tutorial.patch
+Source1:	    gpl-2.0.txt
+Patch:		    disabled_first_tutorial.patch
 
 BuildArch: noarch
 
@@ -34,7 +34,7 @@ Requires:       python3-httplib2
 Requires:       pyxdg
 Requires:       SDL
 Requires:       sox
-# Requires:       librsvg2
+#Requires:       librsvg2
 Requires:       frei0r-plugins
 Requires:       fontconfig
 Requires:       python3-libopenshot >= 0.1.0
@@ -151,6 +151,8 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Thu Mar 16 Pavlo Rudyi <paulcarroty at riseup net> - 2.2.0-1
+- Updated to 2.2
 
 * Sat Sep 03 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 2.1.0-2
 - Disabled "tutorial first"

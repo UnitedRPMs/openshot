@@ -1,16 +1,20 @@
+# openshot-2.2.0-1-20170318gitac2d084.tar.gz
+%global gitdate 20170318
+%global commit0 ac2d0846ee0814b13539ec36c95b0b3e9a037f13
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%global gver .%{gitdate}git%{shortcommit0}
+
 Name:           openshot
 Version:        2.2.0
-Release:        1%{?dist}
+Release:        2%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
 License:        GPLv3+
 URL:            http://www.openshotvideo.com/
-
-#Source0:       http://launchpad.net/openshot/2.0/%{version}/+download/openshot-qt-%{version}.tar.gz
-Source0:        https://github.com/OpenShot/openshot-qt/archive/v%{version}.tar.gz
-Source1:	    gpl-2.0.txt
-Patch:		    disabled_first_tutorial.patch
+Source0:	https://github.com/OpenShot/openshot-qt/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1:	gpl-2.0.txt
+Patch:		disabled_first_tutorial.patch
 
 BuildArch: noarch
 
@@ -69,9 +73,9 @@ Features include:
 
 
 %prep
-%setup -n %{name}-qt-%{version}
+%autosetup -n %{name}-qt-%{commit0} -p0
 sed -i 's/^ROOT =.*/ROOT = False/' setup.py
-%patch -p0 
+
 
 %build
 
@@ -79,7 +83,7 @@ sed -i 's/^ROOT =.*/ROOT = False/' setup.py
 
 # FIX lang
 cd src/locale/
-for dir in *;do echo "%lang($dir) %{python3_sitelib}/openshot_qt/locale/$dir" >> %{_builddir}/%name-qt-%version/OpenShot.lang
+for dir in *;do echo "%lang($dir) %{python3_sitelib}/openshot_qt/locale/$dir" >> %{_builddir}/%{name}-qt-%{commit0}/OpenShot.lang
 done
 
 %install
@@ -143,15 +147,18 @@ update-desktop-database &> /dev/null || :
 %{python3_sitelib}/%{name}_qt/__pycache__/  
 %{python3_sitelib}/%{name}_qt/timeline/  
 %{python3_sitelib}/%{name}_qt/uploads/
-%{python3_sitelib}/%{name}_qt/locale/__pycache__/generate_translations.cpython-35.opt-1.pyc
-%{python3_sitelib}/%{name}_qt/locale/__pycache__/generate_translations.cpython-35.pyc
-%{python3_sitelib}/%{name}_qt/locale/__pycache__/test_translations.cpython-35.opt-1.pyc
-%{python3_sitelib}/%{name}_qt/locale/__pycache__/test_translations.cpython-35.pyc
-
+%{python3_sitelib}/%{name}_qt/locale/__pycache__/generate_translations.cpython-*.opt-1.pyc
+%{python3_sitelib}/%{name}_qt/locale/__pycache__/generate_translations.cpython-*.pyc
+%{python3_sitelib}/%{name}_qt/locale/__pycache__/test_translations.cpython-*.opt-1.pyc
+%{python3_sitelib}/%{name}_qt/locale/__pycache__/test_translations.cpython-*.pyc
 
 
 %changelog
-* Thu Mar 16 Pavlo Rudyi <paulcarroty at riseup net> - 2.2.0-1
+
+* Sat Mar 18 2017 David Vásquez <davidjeremias82 AT gmail DOT com> - 2.2.0-2-20170318gitac2d084
+- Updated to 2.2.0-2-20170318gitac2d084
+
+* Thu Mar 16 2017 Pavlo Rudyi <paulcarroty at riseup net> - 2.2.0-1
 - Updated to 2.2
 
 * Sat Sep 03 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 2.1.0-2

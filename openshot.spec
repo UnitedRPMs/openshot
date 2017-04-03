@@ -1,11 +1,11 @@
-# openshot-2.2.0-1-20170318gitac2d084.tar.gz
-%global gitdate 20170318
-%global commit0 ac2d0846ee0814b13539ec36c95b0b3e9a037f13
+# openshot-2.3.1-20170402gitf677f30.tar.gz
+%global gitdate 20170402
+%global commit0 f677f301e28fb8ca54ee757d2cfbb062c5262470
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .%{gitdate}git%{shortcommit0}
 
 Name:           openshot
-Version:        2.2.0
+Version:        2.3.1
 Release:        2%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
@@ -97,12 +97,12 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}-qt.desktop
 cp -f %{S:1} %{buildroot}/%{python3_sitelib}/openshot_qt/images/Humanity/COPYING
 
 # FIX wrong-script-interpreter/shebang line
-sed -i 's|/usr/bin/env python3|/usr/bin/python3|g' %{buildroot}/%{python3_sitelib}/openshot_qt/windows/export_test.py
+#sed -i 's|/usr/bin/env python3|/usr/bin/python3|g' %{buildroot}/%{python3_sitelib}/openshot_qt/windows/export_test.py
 sed -i 's|/usr/bin/env python3|/usr/bin/python3|g' %{buildroot}/%{python3_sitelib}/openshot_qt/launch.py
 
 # FIX non-executable-script
 chmod 0755 %{buildroot}/%{python3_sitelib}/openshot_qt/launch.py
-chmod 0755 %{buildroot}/%{python3_sitelib}/openshot_qt/windows/export_test.py
+#chmod 0755 %{buildroot}/%{python3_sitelib}/openshot_qt/windows/export_test.py
 
 # FIX python-bytecode-inconsistent-mtime
 rm -f %{buildroot}/%{python3_sitelib}/openshot_qt/windows/__pycache__/export_test.cpython-35.pyc
@@ -146,14 +146,14 @@ update-desktop-database &> /dev/null || :
 %{python3_sitelib}/%{name}_qt/effects/       
 %{python3_sitelib}/%{name}_qt/__pycache__/  
 %{python3_sitelib}/%{name}_qt/timeline/  
-%{python3_sitelib}/%{name}_qt/uploads/
-%{python3_sitelib}/%{name}_qt/locale/__pycache__/generate_translations.cpython-*.opt-1.pyc
-%{python3_sitelib}/%{name}_qt/locale/__pycache__/generate_translations.cpython-*.pyc
-%{python3_sitelib}/%{name}_qt/locale/__pycache__/test_translations.cpython-*.opt-1.pyc
-%{python3_sitelib}/%{name}_qt/locale/__pycache__/test_translations.cpython-*.pyc
+#{python3_sitelib}/%{name}_qt/uploads/
+%{python3_sitelib}/%{name}_qt/locale/__pycache__/
 
 
 %changelog
+
+* Sun Apr 02 2017 David Vásquez <davidjeremias82 AT gmail DOT com> - 2.3.1-2-20170402gitf677f30
+- Updated to 2.3.1-2-20170402gitf677f30
 
 * Sat Mar 18 2017 David Vásquez <davidjeremias82 AT gmail DOT com> - 2.2.0-2-20170318gitac2d084
 - Updated to 2.2.0-2-20170318gitac2d084

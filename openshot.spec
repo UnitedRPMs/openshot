@@ -20,7 +20,7 @@ BuildArch: noarch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-qt5-devel
-BuildRequires:  libopenshot
+BuildRequires:  libopenshot >= 0.1.4
 BuildRequires:  libopenshot-audio
 BuildRequires:  desktop-file-utils
 BuildRequires:	python3-setuptools
@@ -41,7 +41,7 @@ Requires:       sox
 #Requires:       librsvg2
 Requires:       frei0r-plugins
 Requires:       fontconfig
-Requires:       python3-libopenshot >= 0.1.0
+Requires:       python3-libopenshot >= 0.1.4
 Requires:       libopenshot-audio >= 0.1.0
 Requires:       qt5-qtsvg
 Requires:       qt5-qtwebkit

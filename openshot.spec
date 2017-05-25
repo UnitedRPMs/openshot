@@ -5,7 +5,7 @@
 
 Name:           openshot
 Version:        2.3.3
-Release:        2%{?gver}%{dist}
+Release:        3%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
@@ -150,6 +150,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+
+* Thu May 25 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.3.3-3.git0c838ef  
+- Rebuilt for libopenshot-audio
 
 * Wed May 24 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.3.3-2.git0c838ef  
 - Updated to 2.3.3-2.git0c838ef

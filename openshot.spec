@@ -1,11 +1,10 @@
-# openshot-2.3.1-20170402gitf677f30.tar.gz
-%global gitdate 20170402
-%global commit0 f677f301e28fb8ca54ee757d2cfbb062c5262470
+%global gitdate 20170524
+%global commit0 0c838efdc77a3343e059c29e5b8553fe79c17fda
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global gver .%{gitdate}git%{shortcommit0}
+%global gver .git%{shortcommit0}
 
 Name:           openshot
-Version:        2.3.1
+Version:        2.3.3
 Release:        2%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
@@ -151,6 +150,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+
+* Wed May 24 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.3.3-2.git0c838ef  
+- Updated to 2.3.3-2.git0c838ef
 
 * Sun Apr 02 2017 David Vásquez <davidjeremias82 AT gmail DOT com> - 2.3.1-2-20170402gitf677f30
 - Updated to 2.3.1-2-20170402gitf677f30

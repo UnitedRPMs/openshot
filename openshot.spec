@@ -1,11 +1,11 @@
-%global gitdate 20170524
-%global commit0 0c838efdc77a3343e059c29e5b8553fe79c17fda
+%global gitdate 20170606
+%global commit0 aa79cd6092e5a599138520769ede70fe86bb56fe
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           openshot
-Version:        2.3.3
-Release:        3%{?gver}%{dist}
+Version:        2.3.4
+Release:        2%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
@@ -150,6 +150,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+
+* Tue Jun 06 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.3.4-2.gitaa79cd6 
+- Updated to 2.3.4-2.gitaa79cd6 
 
 * Thu May 25 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.3.3-3.git0c838ef  
 - Rebuilt for libopenshot-audio

@@ -19,7 +19,7 @@ BuildArch: noarch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-qt5-devel
-BuildRequires:  libopenshot >= 0.1.4
+BuildRequires:  libopenshot >= 0.1.7
 BuildRequires:  libopenshot-audio
 BuildRequires:  desktop-file-utils
 BuildRequires:	python3-setuptools

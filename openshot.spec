@@ -1,10 +1,9 @@
-%global gitdate 20170606
-%global commit0 aa79cd6092e5a599138520769ede70fe86bb56fe
+%global commit0 a170fb448efab5ec273e74daf3e0f6bb67e56231
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           openshot
-Version:        2.3.4
+Version:        2.4.0
 Release:        2%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
@@ -19,7 +18,7 @@ BuildArch: noarch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-qt5-devel
-BuildRequires:  libopenshot >= 0.1.7
+BuildRequires:  libopenshot >= 0.1.8
 BuildRequires:  libopenshot-audio
 BuildRequires:  desktop-file-utils
 BuildRequires:	python3-setuptools
@@ -78,7 +77,7 @@ sed -i 's/^ROOT =.*/ROOT = False/' setup.py
 
 %build
 
-%{__python3} setup.py build
+%py3_build
 
 # FIX lang
 cd src/locale/
@@ -86,32 +85,15 @@ for dir in *;do echo "%lang($dir) %{python3_sitelib}/openshot_qt/locale/$dir" >>
 done
 
 %install
-%{__python3} setup.py install --root=%{buildroot} --optimize=1
+%py3_install --optimize=1
 
 
 # Validate desktop file
 desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}-qt.desktop
 
-# FIX incorrect-fsf-address
-cp -f %{S:1} %{buildroot}/%{python3_sitelib}/openshot_qt/images/Humanity/COPYING
-
-# FIX wrong-script-interpreter/shebang line
-#sed -i 's|/usr/bin/env python3|/usr/bin/python3|g' %{buildroot}/%{python3_sitelib}/openshot_qt/windows/export_test.py
-sed -i 's|/usr/bin/env python3|/usr/bin/python3|g' %{buildroot}/%{python3_sitelib}/openshot_qt/launch.py
-
-# FIX non-executable-script
-chmod 0755 %{buildroot}/%{python3_sitelib}/openshot_qt/launch.py
-#chmod 0755 %{buildroot}/%{python3_sitelib}/openshot_qt/windows/export_test.py
-
-# FIX python-bytecode-inconsistent-mtime
-rm -f %{buildroot}/%{python3_sitelib}/openshot_qt/windows/__pycache__/export_test.cpython-35.pyc
-rm -f %{buildroot}/%{python3_sitelib}/openshot_qt/__pycache__/launch.cpython-35.opt-1.pyc
-rm -f %{buildroot}/%{python3_sitelib}/openshot_qt/windows/__pycache__/export_test.cpython-35.opt-1.pyc
-rm -f %{buildroot}/%{python3_sitelib}/openshot_qt/__pycache__/launch.cpython-35.pyc
 
 %post
 /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-update-desktop-database &> /dev/null || :
 
 %postun
 if [ $1 -eq 0 ] ; then
@@ -150,6 +132,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+
+* Fri Sep 08 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.0-2.gita170fb4
+- Updated to 2.4.0-2.gita170fb4
 
 * Tue Jun 06 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.3.4-2.gitaa79cd6 
 - Updated to 2.3.4-2.gitaa79cd6 

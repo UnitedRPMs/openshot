@@ -85,7 +85,7 @@ for dir in *;do echo "%lang($dir) %{python3_sitelib}/openshot_qt/locale/$dir" >>
 done
 
 %install
-%py3_install --optimize=1
+%py3_install 
 
 
 # Validate desktop file

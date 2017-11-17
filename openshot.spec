@@ -1,9 +1,9 @@
-%global commit0 a170fb448efab5ec273e74daf3e0f6bb67e56231
+%global commit0 4bdea3798e355b426bf318938eafb6b700e05938
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           openshot
-Version:        2.4.0
+Version:        2.4.1
 Release:        2%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
@@ -18,7 +18,7 @@ BuildArch: noarch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-qt5-devel
-BuildRequires:  libopenshot >= 0.1.8
+BuildRequires:  libopenshot >= 0.1.9
 BuildRequires:  libopenshot-audio
 BuildRequires:  desktop-file-utils
 BuildRequires:	python3-setuptools
@@ -132,6 +132,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+
+* Thu Nov 16 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.1-2.git4bdea37
+- Updated to 2.4.1-2.git4bdea37
 
 * Fri Sep 08 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.0-2.gita170fb4
 - Updated to 2.4.0-2.gita170fb4

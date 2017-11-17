@@ -12,7 +12,6 @@ License:        GPLv3+
 URL:            http://www.openshotvideo.com/
 Source0:	https://github.com/OpenShot/openshot-qt/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1:	gpl-2.0.txt
-Patch:		disabled_first_tutorial.patch
 
 BuildArch: noarch
 
@@ -71,7 +70,7 @@ Features include:
 
 
 %prep
-%autosetup -n %{name}-qt-%{commit0} -p0
+%autosetup -n %{name}-qt-%{commit0} 
 sed -i 's/^ROOT =.*/ROOT = False/' setup.py
 
 

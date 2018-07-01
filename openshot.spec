@@ -1,10 +1,10 @@
-%global commit0 4bdea3798e355b426bf318938eafb6b700e05938
+%global commit0 aecaf4a0947e1cd184440008b5a1f13657ca268c
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           openshot
-Version:        2.4.1
-Release:        2%{?gver}%{dist}
+Version:        2.4.2
+Release:        1%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
@@ -17,8 +17,8 @@ BuildArch: noarch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-qt5-devel
-BuildRequires:  libopenshot >= 0.1.9
-BuildRequires:  libopenshot-audio
+BuildRequires:  libopenshot >= 0.2.0
+BuildRequires:  libopenshot-audio >= 0.1.6
 BuildRequires:  desktop-file-utils
 BuildRequires:	python3-setuptools
 # To fix icon
@@ -38,8 +38,8 @@ Requires:       sox
 #Requires:       librsvg2
 Requires:       frei0r-plugins
 Requires:       fontconfig
-Requires:       python3-libopenshot >= 0.1.4
-Requires:       libopenshot-audio >= 0.1.0
+Requires:       python3-libopenshot >= 0.2.0
+Requires:       libopenshot-audio >= 0.1.6
 Requires:       qt5-qtsvg
 Requires:       qt5-qtwebkit
 Requires:       python3-qt5
@@ -131,6 +131,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+
+* Sat Jun 30 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.2-1.gitaecaf4a
+- Updated to 2.4.2-1.gitaecaf4a
 
 * Thu Nov 16 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.1-2.git4bdea37
 - Updated to 2.4.1-2.git4bdea37

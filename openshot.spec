@@ -4,7 +4,7 @@
 
 Name:           openshot
 Version:        2.4.2
-Release:        2%{?gver}%{dist}
+Release:        3%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
@@ -131,6 +131,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+
+* Sat Jul 14 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.2-3.gitaecaf4a  
+- Automatic Mass Rebuild
 
 * Fri Jul 13 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.2-2.gitaecaf4a
 - Rebuilt for Python 3.7

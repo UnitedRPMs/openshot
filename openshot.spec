@@ -1,9 +1,9 @@
-%global commit0 aecaf4a0947e1cd184440008b5a1f13657ca268c
+%global commit0 b90557dfd7fe3318435f5968a52d3aa36522cc9c
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           openshot
-Version:        2.4.2
+Version:        2.4.3
 Release:        3%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
@@ -131,6 +131,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+
+* Tue Sep 25 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.3-3.gitb90557d
+- Updated to 2.4.3-3.gitb90557d
 
 * Sat Jul 14 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.2-3.gitaecaf4a  
 - Automatic Mass Rebuild

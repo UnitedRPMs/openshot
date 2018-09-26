@@ -30,7 +30,7 @@ BuildRequires:	gettext
 Requires:       mlt
 Requires:       mlt-python
 Requires:       ladspa
-Requires:       notify-python
+#Requires:       notify-python
 Requires:       pygoocanvas
 Requires:       pygtk2-libglade
 Requires:       python3-pillow

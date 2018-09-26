@@ -23,6 +23,9 @@ BuildRequires:  desktop-file-utils
 BuildRequires:	python3-setuptools
 # To fix icon
 BuildRequires:  ImageMagick
+Recommends:     vid.stab
+# for lang
+BuildRequires:	gettext
 
 Requires:       mlt
 Requires:       mlt-python
@@ -49,8 +52,6 @@ Requires:       hicolor-icon-theme
 Requires:       python3-qt5-webkit
 Recommends:     ffmpeg
 Recommends:     blender
-Recommends:     vid.stab
-
 
 %description
 OpenShot Video Editor is a free, open-source, non-linear video editor. It
@@ -79,9 +80,9 @@ sed -i 's/^ROOT =.*/ROOT = False/' setup.py
 %py3_build
 
 # FIX lang
-cd src/locale/
-for dir in *;do echo "%lang($dir) %{python3_sitelib}/openshot_qt/locale/$dir" >> %{_builddir}/%{name}-qt-%{commit0}/OpenShot.lang
-done
+pushd src/language/
+make
+popd
 
 %install
 %py3_install 
@@ -105,7 +106,7 @@ update-desktop-database &> /dev/null || :
 /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
-%files -f OpenShot.lang
+%files 
 %{_bindir}/openshot-qt
 %{_prefix}/lib/mime/packages/openshot-qt
 %{python3_sitelib}/%{name}_qt*-py*.egg-info/
@@ -126,9 +127,10 @@ update-desktop-database &> /dev/null || :
 %{python3_sitelib}/%{name}_qt/effects/       
 %{python3_sitelib}/%{name}_qt/__pycache__/  
 %{python3_sitelib}/%{name}_qt/timeline/  
-#{python3_sitelib}/%{name}_qt/uploads/
-%{python3_sitelib}/%{name}_qt/locale/__pycache__/
-
+%{python3_sitelib}/%{name}_qt/language/
+%{_datadir}/icons/hicolor/*/apps/openshot-qt.png
+%{_datadir}/icons/hicolor/scalable/apps/openshot-qt.svg
+%{_datadir}/metainfo/openshot-qt.appdata.xml
 
 %changelog
 

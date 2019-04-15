@@ -110,6 +110,7 @@ update-desktop-database &> /dev/null || :
 %{_bindir}/openshot-qt
 %{_prefix}/lib/mime/packages/openshot-qt
 %{python3_sitelib}/%{name}_qt*-py*.egg-info/
+%{python3_sitelib}/openshot_qt/__init__.py
 %{_datadir}/applications/openshot-qt.desktop
 %{_datadir}/mime/packages/openshot-qt.xml
 %{_datadir}/pixmaps/openshot-qt.svg

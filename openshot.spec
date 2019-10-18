@@ -4,7 +4,7 @@
 
 Name:           openshot
 Version:        2.4.4
-Release:        8%{?gver}%{dist}
+Release:        9%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
@@ -28,7 +28,7 @@ Recommends:     vid.stab
 BuildRequires:	gettext
 
 Requires:       mlt
-Requires:       mlt-python
+Requires:       python3-mlt
 Requires:       ladspa
 #Requires:       notify-python
 #Requires:       pygoocanvas
@@ -134,6 +134,9 @@ update-desktop-database &> /dev/null || :
 %{_datadir}/metainfo/openshot-qt.appdata.xml
 
 %changelog
+
+* Fri Oct 18 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.4-9.git7c8925b
+- Requires changed to python3-mlt
 
 * Fri May 03 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.4-8.git7c8925b
 - Drop pygoocanvas

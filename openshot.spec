@@ -2,9 +2,6 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
-%global __mangle_shebangs_exclude_from %{_datadir}/applications/
-
-
 Name:           openshot
 Version:        2.4.4
 Release:        9%{?gver}%{dist}

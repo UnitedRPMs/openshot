@@ -2,6 +2,9 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
+%global __mangle_shebangs_exclude_from %{_datadir}/applications/
+
+
 Name:           openshot
 Version:        2.4.4
 Release:        9%{?gver}%{dist}
@@ -93,6 +96,9 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/org.openshot.OpenSho
 
 
 # mangling shebang
+
+find -type f -exec sed -iE '1s=^#! */usr/bin/\(python\|env python\)[23]\?=#!%{__python3}=' {} +
+
 sed -i 's|/bin/sh|/usr/bin/bash|g' %{buildroot}/%{python3_sitelib}/%{name}_qt/images/gen-hw-icons.sh
 
 

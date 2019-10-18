@@ -1,4 +1,4 @@
-%global commit0 7c8925b5c3002cd8cebef77868d43b47bf93242b
+%global commit0 5f08a30102b55e16aaf898dd641732c46c52d528
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -53,6 +53,7 @@ Requires:       python3-qt5-webkit
 Recommends:     ffmpeg
 Recommends:     blender
 
+
 %description
 OpenShot Video Editor is a free, open-source, non-linear video editor. It
 can create and edit videos and movies using many popular video, audio,
@@ -69,9 +70,8 @@ Features include:
 * 3D animation (titles and simulations)
 * Upload videos (YouTube and Vimeo supported)
 
-
 %prep
-%autosetup -n %{name}-qt-%{commit0} 
+%autosetup -n %{name}-qt-%{commit0} -p0
 sed -i 's/^ROOT =.*/ROOT = False/' setup.py
 
 
@@ -80,16 +80,20 @@ sed -i 's/^ROOT =.*/ROOT = False/' setup.py
 %py3_build
 
 # FIX lang
-pushd src/language/
-make
-popd
+ pushd src/language/
+ make
+ popd
 
 %install
 %py3_install 
 
 
 # Validate desktop file
-desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}-qt.desktop
+desktop-file-validate %{buildroot}/%{_datadir}/applications/org.openshot.OpenShot.desktop
+
+
+# mangling shebang
+sed -i 's|/bin/sh|/usr/bin/bash|g' %{buildroot}/%{python3_sitelib}/%{name}_qt/images/gen-hw-icons.sh
 
 
 %post
@@ -111,8 +115,8 @@ update-desktop-database &> /dev/null || :
 %{_prefix}/lib/mime/packages/openshot-qt
 %{python3_sitelib}/%{name}_qt*-py*.egg-info/
 %{python3_sitelib}/openshot_qt/__init__.py
-%{_datadir}/applications/openshot-qt.desktop
-%{_datadir}/mime/packages/openshot-qt.xml
+%{_datadir}/applications/org.openshot.OpenShot.desktop
+%{_datadir}/mime/packages/*.xml
 %{_datadir}/pixmaps/openshot-qt.svg
 %{python3_sitelib}/%{name}_qt/blender/  
 %{python3_sitelib}/%{name}_qt/images/     
@@ -128,15 +132,17 @@ update-desktop-database &> /dev/null || :
 %{python3_sitelib}/%{name}_qt/effects/       
 %{python3_sitelib}/%{name}_qt/__pycache__/  
 %{python3_sitelib}/%{name}_qt/timeline/  
-%{python3_sitelib}/%{name}_qt/language/
 %{_datadir}/icons/hicolor/*/apps/openshot-qt.png
 %{_datadir}/icons/hicolor/scalable/apps/openshot-qt.svg
-%{_datadir}/metainfo/openshot-qt.appdata.xml
+%{_datadir}/metainfo/*.appdata.xml
+%{python3_sitelib}/%{name}_qt/language/
+%{python3_sitelib}/%{name}_qt/resources/
 
 %changelog
 
 * Fri Oct 18 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.4-9.git7c8925b
 - Requires changed to python3-mlt
+- Updated to commit with compatibility to Blender 2.80 release
 
 * Fri May 03 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.4-8.git7c8925b
 - Drop pygoocanvas

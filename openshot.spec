@@ -1,10 +1,10 @@
-%global commit0 5f08a30102b55e16aaf898dd641732c46c52d528
+%global commit0 81ad4b10ffa8ed7e4f5b5ad9e95a684b0dec36aa
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           openshot
 Version:        2.4.4
-Release:        9%{?gver}%{dist}
+Release:        10%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
@@ -89,14 +89,14 @@ sed -i 's/^ROOT =.*/ROOT = False/' setup.py
 
 
 # Validate desktop file
-desktop-file-validate %{buildroot}/%{_datadir}/applications/org.openshot.OpenShot.desktop
+desktop-file-validate %{buildroot}/%{_datadir}/applications/*.desktop
 
 
 # mangling shebang
 
 find -type f -exec sed -iE '1s=^#! */usr/bin/\(python\|env python\)[23]\?=#!%{__python3}=' {} +
 
-sed -i 's|/bin/sh|/usr/bin/bash|g' %{buildroot}/%{python3_sitelib}/%{name}_qt/images/gen-hw-icons.sh
+# sed -i 's|/bin/sh|/usr/bin/bash|g' %{buildroot}/%{python3_sitelib}/%{name}_qt/images/gen-hw-icons.sh
 
 
 %post
@@ -118,7 +118,7 @@ update-desktop-database &> /dev/null || :
 %{_prefix}/lib/mime/packages/openshot-qt
 %{python3_sitelib}/%{name}_qt*-py*.egg-info/
 %{python3_sitelib}/openshot_qt/__init__.py
-%{_datadir}/applications/org.openshot.OpenShot.desktop
+%{_datadir}/applications/*.desktop
 %{_datadir}/mime/packages/*.xml
 %{_datadir}/pixmaps/openshot-qt.svg
 %{python3_sitelib}/%{name}_qt/blender/  
@@ -142,6 +142,9 @@ update-desktop-database &> /dev/null || :
 %{python3_sitelib}/%{name}_qt/resources/
 
 %changelog
+
+* Thu Oct 31 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.4-10.git81ad4b1
+- Commit no drastic; also we need usability
 
 * Fri Oct 18 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.4-9.git7c8925b
 - Requires changed to python3-mlt

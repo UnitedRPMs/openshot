@@ -55,7 +55,7 @@ Requires:       ladspa
 Requires:       pygtk2-libglade
 Requires:       python3-pillow
 Requires:       python3-httplib2
-Requires:       pyxdg
+Requires:       python3-pyxdg
 Requires:       SDL
 Requires:       sox
 #Requires:       librsvg2

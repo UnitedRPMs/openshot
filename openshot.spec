@@ -1,10 +1,30 @@
-%global commit0 81ad4b10ffa8ed7e4f5b5ad9e95a684b0dec36aa
+#
+# spec file for package openshot
+#
+# Copyright (c) 2020 UnitedRPMs.
+#
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
+# Please submit bugfixes or comments via https://goo.gl/zqFJft
+#
+
+# 
+%define _legacy_common_support 1
+
+%global commit0 fa699d77da3692a7f2f96e5ef37a95de11d07327
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           openshot
-Version:        2.4.4
-Release:        10%{?gver}%{dist}
+Version:        2.5.0
+Release:        7%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
@@ -17,8 +37,8 @@ BuildArch: noarch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-qt5-devel
-BuildRequires:  libopenshot >= 0.2.3
-BuildRequires:  libopenshot-audio >= 0.1.8
+BuildRequires:  libopenshot >= 0.2.4
+BuildRequires:  libopenshot-audio >= 0.1.9
 BuildRequires:  desktop-file-utils
 BuildRequires:	python3-setuptools
 # To fix icon
@@ -142,6 +162,9 @@ update-desktop-database &> /dev/null || :
 %{python3_sitelib}/%{name}_qt/resources/
 
 %changelog
+
+* Mon Feb 10 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.5.0-7.gitfa699d7
+- Updated to 2.5.0-7.gitfa699d7
 
 * Thu Oct 31 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.4.4-10.git81ad4b1
 - Commit no drastic; also we need usability

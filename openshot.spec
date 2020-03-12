@@ -18,12 +18,12 @@
 # 
 %define _legacy_common_support 1
 
-%global commit0 fa699d77da3692a7f2f96e5ef37a95de11d07327
+%global commit0 e67abe7bf9d428068ccf6807d6a1184beb6238e4
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           openshot
-Version:        2.5.0
+Version:        2.5.1
 Release:        7%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
@@ -37,8 +37,8 @@ BuildArch: noarch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-qt5-devel
-BuildRequires:  libopenshot >= 0.2.4
-BuildRequires:  libopenshot-audio >= 0.1.9
+BuildRequires:  libopenshot >= 0.2.5
+BuildRequires:  libopenshot-audio >= 0.2.0
 BuildRequires:  desktop-file-utils
 BuildRequires:	python3-setuptools
 # To fix icon
@@ -162,6 +162,9 @@ update-desktop-database &> /dev/null || :
 %{python3_sitelib}/%{name}_qt/resources/
 
 %changelog
+
+* Wed Mar 11 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.5.1-7.gite67abe7
+- Updated to 2.5.1-7.gite67abe7
 
 * Mon Feb 10 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.5.0-7.gitfa699d7
 - Updated to 2.5.0-7.gitfa699d7

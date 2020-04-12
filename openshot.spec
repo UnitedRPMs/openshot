@@ -18,13 +18,13 @@
 # 
 %define _legacy_common_support 1
 
-%global commit0 e67abe7bf9d428068ccf6807d6a1184beb6238e4
+%global commit0 140466cad5aa36196258b0bbc81f27f7da6b57bc
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           openshot
 Version:        2.5.1
-Release:        7%{?gver}%{dist}
+Release:        8%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
@@ -162,6 +162,9 @@ update-desktop-database &> /dev/null || :
 %{python3_sitelib}/%{name}_qt/resources/
 
 %changelog
+
+* Sat Apr 11 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.5.1-8.git140466c
+- Updated to current commit
 
 * Wed Mar 11 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.5.1-7.gite67abe7
 - Updated to 2.5.1-7.gite67abe7

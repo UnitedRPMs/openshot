@@ -18,13 +18,13 @@
 # 
 %define _legacy_common_support 1
 
-%global commit0 140466cad5aa36196258b0bbc81f27f7da6b57bc
+%global commit0 0d3da87caf1b5976482e69460662cef4aa12aa9d
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Name:           openshot
 Version:        2.5.1
-Release:        8%{?gver}%{dist}
+Release:        9%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
@@ -35,7 +35,11 @@ Source1:	gpl-2.0.txt
 
 BuildArch: noarch
 
+%if 0%{?fedora} >= 33
+BuildRequires:  python3.9-devel
+%else
 BuildRequires:  python3-devel
+%endif
 BuildRequires:  python3-qt5-devel
 BuildRequires:  libopenshot >= 0.2.5
 BuildRequires:  libopenshot-audio >= 0.2.0
@@ -161,7 +165,16 @@ update-desktop-database &> /dev/null || :
 %{python3_sitelib}/%{name}_qt/language/
 %{python3_sitelib}/%{name}_qt/resources/
 
+%{python3_sitelib}/%{name}_qt/emojis/
+%{_datadir}/icons/hicolor/scalable/mimetypes/openshot-qt-doc.svg
+
+
+
 %changelog
+
+* Tue Jun 02 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.5.1-9.git0d3da87
+- Updated to current commit
+- Rebuilt for python3.9
 
 * Sat Apr 11 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.5.1-8.git140466c
 - Updated to current commit

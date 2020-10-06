@@ -24,7 +24,7 @@
 
 Name:           openshot
 Version:        2.5.1
-Release:        9%{?gver}%{dist}
+Release:        11%{?gver}%{dist}
 Summary:        Create and edit videos and movies
 
 Group:          Applications/Multimedia
@@ -35,11 +35,7 @@ Source1:	gpl-2.0.txt
 
 BuildArch: noarch
 
-%if 0%{?fedora} >= 33
-BuildRequires:  python3.9-devel
-%else
 BuildRequires:  python3-devel
-%endif
 BuildRequires:  python3-qt5-devel
 BuildRequires:  libopenshot >= 0.2.5
 BuildRequires:  libopenshot-audio >= 0.2.0
@@ -171,6 +167,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+
+* Mon Oct 05 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.5.1-11.git0d3da87
+- Rebuilt
 
 * Tue Jun 02 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.5.1-9.git0d3da87
 - Updated to current commit
